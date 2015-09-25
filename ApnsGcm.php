@@ -3,6 +3,7 @@
 namespace gbksoft\apnsGcm;
 
 use Yii;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
 {
