@@ -23,13 +23,13 @@ class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
         $channel->queue_declare('apns-gcm', false, true, false, false);
 
         $msg = new AMQPMessage(
-            [
+            json_encode([
                 'type' => $type,
                 'token' => $token,
                 'text' => $text,
                 'payloadData' => $payloadData,
                 'args' => $args,
-            ],
+            ]),
             [
                 'content_type' => 'application/json',
                 'delivery_mode' => 2
