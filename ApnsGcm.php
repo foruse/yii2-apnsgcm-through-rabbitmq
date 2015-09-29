@@ -10,13 +10,13 @@ class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
     /**
      * add to queue a push notification depending on type
      * @param $type
-     * @param $token
+     * @param $tokens
      * @param $text
      * @param array $payloadData
      * @param array $args
      * @return boolean
      */
-    public function addToQueue($type, $token, $text, $payloadData = [], $args = [])
+    public function addToQueue($type, $tokens, $text, $payloadData = [], $args = [])
     {
         $amqp = Yii::$app->amqp;
         $channel = $amqp->getChannel();
@@ -25,7 +25,7 @@ class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
         $msg = new AMQPMessage(
             json_encode([
                 'type' => $type,
-                'token' => $token,
+                'tokens' => $tokens,
                 'text' => $text,
                 'payloadData' => $payloadData,
                 'args' => $args,

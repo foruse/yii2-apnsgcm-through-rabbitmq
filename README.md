@@ -25,7 +25,11 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+To use this extension,  simply add the following code in your application configuration (console.php):
 
 ```php
-<?= \gbksoft\apns\AutoloadExample::widget(); ?>```
+'controllerMap' => [
+    'apnsGcm' => [
+        'class' => 'gbksoft\console\ApnsGcmController',
+    ],
+],
