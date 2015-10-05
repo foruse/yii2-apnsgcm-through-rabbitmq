@@ -17,7 +17,7 @@ class ApnsGcmController extends AmqpConsoleController
 
         if (!$body) {
             $channel->basic_ack($message->delivery_info['delivery_tag']);
-            Yii::error('Has no body', 'ApnsGcm');
+            Yii::error('Has no body. json: ' . json_last_error_msg(), 'ApnsGcm');
             return false;
         }
 
