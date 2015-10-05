@@ -143,4 +143,14 @@ $apnsGcm->addToQueue(\gbksoft\apnsGcm\ApnsGcm::TYPE_APNS, $push_tokens, $message
 )
 ```
 
+**You need to add console command to config**
+
+```php
+'controllerMap' => [
+    'apnsGcm' => [
+        'class' => 'gbksoft\apnsGcm\console\ApnsGcmController',
+    ],
+],
+```
+
 This extension is fork of https://github.com/bryglen/yii2-apns-gcm
