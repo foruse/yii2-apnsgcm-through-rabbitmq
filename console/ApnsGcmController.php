@@ -24,7 +24,7 @@ class ApnsGcmController extends AmqpConsoleController
         // Log data
         Yii::info($message->body, 'ApnsGcm');
 
-        /* @var $apnsGcm \bryglen\apnsgcm\ApnsGcm */
+        /* @var $apnsGcm \gbksoft\apnsGcm\ApnsGcm */
         $result = Yii::$app->apnsGcm->send(
             $body->type,
             (array)$body->token,
