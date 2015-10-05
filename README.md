@@ -25,7 +25,7 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-First of all, you need to configure the following extensions:
+First of all, you need to configure the following extensions to work with RebbitMQ:
   - https://github.com/webtoucher/yii2-amqp
 
 in your main.php your configuration would look like this
@@ -143,7 +143,7 @@ $apnsGcm->addToQueue(\gbksoft\apnsGcm\ApnsGcm::TYPE_APNS, $push_tokens, $message
 )
 ```
 
-**You need to add console command to config**
+**You need to add console command to config like this**
 
 ```php
 'controllerMap' => [
