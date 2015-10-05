@@ -11,8 +11,8 @@ class ApnsGcmController extends AmqpConsoleController
     {
         $amqp = Yii::$app->amqp;
         $channel = $amqp->getChannel();
-        $channel->queue_declare('apns-gcm', false, true, false, false);
-        $message = $channel->basic_get('apns-gcm');
+        $channel->queue_declare($amqp->queueName, false, true, false, false);
+        $message = $channel->basic_get($amqp->queueName);
         $body = json_decode($message->body);
 
         if (!$body) {
@@ -27,12 +27,13 @@ class ApnsGcmController extends AmqpConsoleController
         /* @var $apnsGcm \bryglen\apnsgcm\ApnsGcm */
         $result = Yii::$app->apnsGcm->send(
             $body->type,
-            (array)$body->tokens,
+            (array)$body->token,
             $body->text,
             $body->payloadData,
             $body->args
         );
 
+        $channel->basic_ack($message->delivery_info['delivery_tag']);
         $channel->close();
 
         return $result;

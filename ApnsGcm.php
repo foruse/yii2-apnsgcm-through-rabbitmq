@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author GBKSOFT <hello@gbksoft.com>
+ * @link http://gbksoft.com
+ */
 
 namespace gbksoft\apnsGcm;
 
@@ -7,6 +11,13 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
 {
+    /**
+     * Queue name in RabbitMQ
+     *
+     * @var string
+     */
+    public $queueName = 'apns-gcm';
+
     /**
      * add to queue a push notification depending on type
      * @param $type
@@ -20,7 +31,7 @@ class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
     {
         $amqp = Yii::$app->amqp;
         $channel = $amqp->getChannel();
-        $channel->queue_declare('apns-gcm', false, true, false, false);
+        $channel->queue_declare($this->queueName, false, true, false, false);
 
         $msg = new AMQPMessage(
             json_encode([
@@ -36,7 +47,7 @@ class ApnsGcm extends \bryglen\apnsgcm\ApnsGcm
             ]
         );
 
-        $result = $channel->basic_publish($msg, '', 'apns-gcm');
+        $result = $channel->basic_publish($msg, '', $this->queueName);
         $channel->close();
 
         return $result;
